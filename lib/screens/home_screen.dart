@@ -14,78 +14,97 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[900],
       appBar: AppBar(
-        title: const Text(
-          "HOŞ GELDİNİZ !",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
         backgroundColor: Colors.green[900],
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: Center(
-              child: Text("Ne alırsınız ?", style: TextStyle(fontSize: 12)),
+        toolbarHeight: 70, // AppBar yüksekliğini artır
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              "HOŞ GELDİNİZ !",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 4),
+            Text(
+              "Ne alırsınız ?",
+              style: TextStyle(fontSize: 15, color: Colors.white),
+            ),
+          ],
+        ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 16),
-          // Menü Seçimi
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _isMakarnaSelected = true;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Text(
-                    "Makarnalar",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      decoration: _isMakarnaSelected
-                          ? TextDecoration.underline
-                          : TextDecoration.none,
-                      color: _isMakarnaSelected ? Colors.black : Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _isMakarnaSelected = false;
-                  });
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                  child: Text(
-                    "İçecekler",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      decoration: !_isMakarnaSelected
-                          ? TextDecoration.underline
-                          : TextDecoration.none,
-                      color: !_isMakarnaSelected ? Colors.black : Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
-            ],
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(40),
+            topRight: Radius.circular(40),
           ),
-          const SizedBox(height: 12),
-          const Divider(thickness: 1),
+        ),
+        child: Column(
+          children: [
+            const SizedBox(height: 16),
+            // Menü Seçimi
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isMakarnaSelected = true;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Text(
+                      "Makarnalar",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        decoration: _isMakarnaSelected
+                            ? TextDecoration.underline
+                            : TextDecoration.none,
+                        color: _isMakarnaSelected ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isMakarnaSelected = false;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Text(
+                      "İçecekler",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        decoration: !_isMakarnaSelected
+                            ? TextDecoration.underline
+                            : TextDecoration.none,
+                        color: !_isMakarnaSelected ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            const Divider(thickness: 1),
 
-          // Menü içeriği
-          Expanded(child: _isMakarnaSelected ? MakarnaMenu() : IceceklerMenu()),
-        ],
+            // Menü içeriği
+            Expanded(
+              child: _isMakarnaSelected ? MakarnaMenu() : IceceklerMenu(),
+            ),
+          ],
+        ),
       ),
     );
   }
